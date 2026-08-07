@@ -1,5 +1,22 @@
-exports.findOrCreateUser = async (clerkUser) => {
-  console.log("Clerk User:", clerkUser);
+const { User } = require("../models");
 
-  // We'll implement the database logic later.
+exports.findOrCreateUser = async ({ clerkId, name, email }) => {
+  let user = await User.findOne({
+    where: {
+      clerkId,
+    },
+  });
+
+  if (user) {
+    return user;
+  }
+
+  user = await User.create({
+    clerkId,
+    name,
+    email,
+    role: "customer",
+  });
+
+  return user;
 };
