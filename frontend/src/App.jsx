@@ -6,25 +6,25 @@ function App() {
   const callBackend = async () => {
     const token = await getToken();
 
+    console.log("TOKEN:", token);
+
     const response = await fetch("http://localhost:3000/api/users/me", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    const data = await response.json();
-    console.log(data);
+    console.log("STATUS:", response.status);
+
+    const text = await response.text();
+    console.log(text);
   };
 
   return (
     <div>
       <h1>Home Page</h1>
 
-      {isSignedIn && (
-        <button onClick={callBackend}>
-          Call Backend
-        </button>
-      )}
+      {isSignedIn && <button onClick={callBackend}>Call Backend</button>}
     </div>
   );
 }

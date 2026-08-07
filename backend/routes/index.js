@@ -1,10 +1,8 @@
 const express = require("express");
-const homeController = require("../controllers/homeController");
-const userRoutes = require("./userRoutes");
-
 const router = express.Router();
+const userRoutes = require("./userRoutes");
+console.log("ROUTES INDEX LOADED");
 
-router.get("/", homeController.home);
 router.use("/api/users", userRoutes);
 
 module.exports = router;
