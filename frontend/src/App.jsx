@@ -6,7 +6,7 @@ function App() {
   const callBackend = async () => {
     const token = await getToken();
 
-    const response = await fetch("http://localhost:3000/api/profile", {
+    const response = await fetch("http://localhost:3000/api/users/me", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -1,11 +1,10 @@
 const express = require("express");
-const { requireAuth } = require("@clerk/express");
 const homeController = require("../controllers/homeController");
+const userRoutes = require("./userRoutes");
 
 const router = express.Router();
 
 router.get("/", homeController.home);
-
-router.get("/api/profile", requireAuth(), homeController.profile);
+router.use("/api/users", userRoutes);
 
 module.exports = router;
