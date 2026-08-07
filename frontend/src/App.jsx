@@ -1,18 +1,31 @@
-import { Routes, Route } from "react-router-dom";
-import SignInPage from "./pages/SignInPage";
-import SignUpPage from "./pages/SignUpPage";
-
-function Home() {
-  return <h1>Home Page</h1>;
-}
+import { useAuth } from "@clerk/clerk-react";
 
 function App() {
+  const { isSignedIn, getToken } = useAuth();
+
+  const callBackend = async () => {
+    const token = await getToken();
+
+    const response = await fetch("http://localhost:3000/api/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+    console.log(data);
+  };
+
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/sign-in/*" element={<SignInPage />} />
-      <Route path="/sign-up/*" element={<SignUpPage />} />
-    </Routes>
+    <div>
+      <h1>Home Page</h1>
+
+      {isSignedIn && (
+        <button onClick={callBackend}>
+          Call Backend
+        </button>
+      )}
+    </div>
   );
 }
 

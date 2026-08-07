@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const { clerkMiddleware } = require("@clerk/express");
+const { requireAuth } = require("@clerk/express");
 
 dotenv.config();
 
@@ -14,6 +15,14 @@ app.use(clerkMiddleware());
 app.get("/", (req, res) => {
   res.json({
     message: "Express API is running 🚀",
+  });
+});
+
+app.get("/api/profile", requireAuth(), (req, res) => {
+  res.json({
+    message: "Protected Route",
+
+    userId: req.auth.userId,
   });
 });
 
