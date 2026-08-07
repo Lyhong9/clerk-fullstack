@@ -1,19 +1,11 @@
 const express = require("express");
 const { requireAuth } = require("@clerk/express");
+const homeController = require("../controllers/homeController");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({
-    message: "Express API is running 🚀",
-  });
-});
+router.get("/", homeController.home);
 
-router.get("/api/profile", requireAuth(), (req, res) => {
-  res.json({
-    message: "Protected Route",
-    userId: req.auth.userId,
-  });
-});
+router.get("/api/profile", requireAuth(), homeController.profile);
 
 module.exports = router;
