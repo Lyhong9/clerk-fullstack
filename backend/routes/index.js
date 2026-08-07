@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const userRoutes = require("./userRoutes");
-console.log("ROUTES INDEX LOADED");
 
 router.use("/api/users", userRoutes);
 

@@ -6,7 +6,6 @@ const { clerkMiddleware } = require("@clerk/express");
 dotenv.config();
 
 const routes = require("./routes/index");
-console.log(routes);
 
 const app = express();
 
